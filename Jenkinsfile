@@ -21,7 +21,7 @@ node {
         sh "docker push ${imageName}"
 
     stage "Deploy"
-        
+        sh "docker stop $(docker ps -a -q)"
         sh "docker stop socat-registry; docker rm socat-registry" 
         sh "docker run -d -e 'REGIP=`minikube ip`' --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c 'socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:`minikube ip`:30400'"
         sh "sed 's#127.0.0.1:30400/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply -f -"
