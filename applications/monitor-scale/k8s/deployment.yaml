@@ -30,7 +30,7 @@ spec:
         tier: monitor-scale
     spec:
       containers:
-      - image: 127.0.0.1:30400/monitor-scale:latest
+      - image: anshupande/monitor-scale:latest
         name: monitor-scale
         imagePullPolicy: Always
         ports:
@@ -41,7 +41,7 @@ spec:
         args: ["proxy","-p","2345"]
         ports:
         - containerPort: 2345
-          name: kubectl-api          
+          name: kubectl-api
 
 ---
 apiVersion: extensions/v1beta1
