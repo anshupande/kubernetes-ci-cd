@@ -30,12 +30,7 @@ spec:
         tier: hello-kenzan
     spec:
       containers:
-<<<<<<< HEAD
-
-      - image: anshupande/hello-kenzan:latest
-=======
-      - image: 127.0.0.1:30400/hello-kenzan:$BUILD_TAG
->>>>>>> upstream/master
+      - image: 127.0.0.1:30400/hello-kenzan:latest
         name: hello-kenzan
         ports:
         - containerPort: 80

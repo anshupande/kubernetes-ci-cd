@@ -21,6 +21,13 @@ node {
         sh "docker push ${imageName}"
 
     stage "Deploy"
+<<<<<<< HEAD
         sh "sed 's#anshupande/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply -f -"
         sh "kubectl rollout status deployment/hello-kenzan"
 }
+=======
+
+        kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
+
+}
+>>>>>>> upstream/master

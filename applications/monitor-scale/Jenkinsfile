@@ -11,6 +11,7 @@ node {
     registryHost = "anshupande/"
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
+    env.BUILD_TAG=tag
 
     stage "Build"
 
@@ -22,5 +23,10 @@ node {
 
     stage "Deploy"
 
+<<<<<<< HEAD
         sh "sed 's#anshupande/monitor-scale:latest#'$BUILDIMG'#' applications/monitor-scale/k8s/deployment.yaml | kubectl apply -f -"
 }
+=======
+        kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
+}
+>>>>>>> upstream/master

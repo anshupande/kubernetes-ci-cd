@@ -1,27 +1,16 @@
 #!/usr/bin/env bash
 
-echo "installing etcd operator"
-kubectl  create -f manifests/deployment.yaml
-kubectl  rollout status -f manifests/deployment.yaml
+echo "initializing Helm"
+helm init --wait --debug
 
-until kubectl  get thirdpartyresource cluster.etcd.coreos.com
-do
-    echo "waiting for operator"
-    sleep 2
-done
+echo "installing etcd operator (Helm Chart)"
+helm install stable/etcd-operator --version 0.8.0 --name etcd-operator --debug
+kubectl rollout status deploy/tiller-deploy -n kube-system
 
-echo "pausing for 10 seconds for operator to settle"
-sleep 10
-
-kubectl  create -f manifests/example-etcd-cluster.yaml
+kubectl  create -f manifests/etcd-cluster.yaml
 
 echo "installing etcd cluster service"
-kubectl  create -f manifests/service.json
+kubectl  create -f manifests/etcd-service.yaml
 
 echo "waiting for etcd cluster to turnup"
-
-until kubectl  get pod example-etcd-cluster-0002
-do
-    echo "waiting for etcd cluster to turnup"
-    sleep 2
-done
+sleep 10
