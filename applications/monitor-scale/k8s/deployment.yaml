@@ -32,11 +32,7 @@ spec:
     spec:
       serviceAccountName: monitor-scale
       containers:
-<<<<<<< HEAD
-      - image: anshupande/monitor-scale:latest
-=======
       - image: 127.0.0.1:30400/monitor-scale:$BUILD_TAG
->>>>>>> upstream/master
         name: monitor-scale
         imagePullPolicy: Always
         ports:

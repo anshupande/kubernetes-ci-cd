@@ -14,11 +14,7 @@ spec:
         tier: puzzle
     spec:
       containers:
-<<<<<<< HEAD
-      - image: anshupande/puzzle:latest
-=======
       - image: 127.0.0.1:30400/puzzle:$BUILD_TAG
->>>>>>> upstream/master
         name: puzzle
         imagePullPolicy: Always
         lifecycle:
